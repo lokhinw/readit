@@ -1,23 +1,24 @@
 var express = require("express"),
+    app = express(),
     mongoose = require("mongoose"),
-    methodOverride = require("method-override"),
-    expressSanitizer = require("express-sanitizer"),
-    bodyParser = require("body-parser"),
-    app = express();
+    bodyParser = require("body-parser");
 
 mongoose.connect("mongodb://localhost/readit");
-app.set("view engine", "ejs");
-app.use(express.static("public"));
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(expressSanitizer());
-app.use(methodOverride("_method"));
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
-  res.send("test");
+    res.render("index");
+});
+
+app.get("*", function(req, res) {
+    res.render("404");
 });
 
 app.listen(3000, function() {
-  console.log("Server is listening on port 3000");
+    console.log("Server is listening on port 3000");
 });
