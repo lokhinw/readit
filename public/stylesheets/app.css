@@ -1,0 +1,10 @@
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand>img {
+    position: relative;
+    height: 200%;
+    bottom: 10px;
+    width: auto;
+}
