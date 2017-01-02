@@ -2,7 +2,7 @@ var express = require("express"),
     app = express(),
     mongoose = require("mongoose"),
     bodyParser = require("body-parser");
-
+var subs = ["all", "tifu", "pics"];
 mongoose.connect("mongodb://localhost/readit");
 
 app.use(bodyParser.urlencoded({
@@ -13,6 +13,10 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
     res.render("index");
+});
+
+app.get("/r", function(req, res) {
+    res.render("subreadit", {subreadits: subs});
 });
 
 app.get("*", function(req, res) {
