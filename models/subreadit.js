@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var subreaditSchema = new mongoose.model({
+var subreaditSchema = new mongoose.Schema({
     name: String
 });
 

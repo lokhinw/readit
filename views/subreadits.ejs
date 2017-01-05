@@ -1,0 +1,7 @@
+<% include partials/header %>
+<% subreadits.forEach(function(subreadit){ %>
+    <p>
+        <a href="/r/<%= subreadit.name %>"><%= subreadit.name %></a>
+    </p>
+<% }); %>
+<% include partials/footer %>
