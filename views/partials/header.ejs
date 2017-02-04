@@ -24,9 +24,13 @@
                         <li>
                             <a href="/">home</a>
                         </li>
-                        <li>
-                            <a href="/r">subreadits</a>
-                        </li>
+
+                        <% for (let i = 0; i < 5; i++){ %>
+                            <li>
+                                <a href="/r/<%= subreadit.name %>"><%= subreadits.name[i] %></a>
+                            </li>
+                        <% } %>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>

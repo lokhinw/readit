@@ -13,7 +13,15 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", function(req, res) {
-    res.render("index");
+    Subreadit.find({}, function(err, subreadits) {
+        if (err) {
+            // TODO: Add error handling
+        } else {
+            res.render("index", {
+                subreadits: subreadits
+            });
+        }
+    });
 });
 
 app.get("/r", function(req, res) {
@@ -29,7 +37,15 @@ app.get("/r", function(req, res) {
 });
 
 app.get("/r/new", function(req, res) {
-    res.render("new");
+    Subreadit.find({}, function(err, subreadits) {
+        if (err) {
+            // TODO: Add error handling
+        } else {
+            res.render("new", {
+                subreadits: subreadits
+            });
+        }
+    });
 });
 
 app.get("/r/:name", function(req, res) {
