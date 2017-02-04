@@ -48,13 +48,21 @@ app.get("/r/:name", function(req, res) {
 });
 
 app.post("/r", function(req, res) {
-    Subreadit.create({
-        name: req.body.name
+    Subreadit.find({
+        name: new RegExp('^' + req.body.name + '$', "i")
     }, function(err, subreadit) {
-        if (err) {
-            // TODO: Add error handling for creating subreadit
+        if (subreadit && subreadit.length === 0) {
+            Subreadit.create({
+                name: req.body.name
+            }, function(err, subreadit) {
+                if (err) {
+                    // TODO: Add error handling for creating subreadit
+                } else {
+                    res.redirect("/r");
+                }
+            });
         } else {
-            res.redirect("/r");
+            res.redirect("back");
         }
     });
 });
