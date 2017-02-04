@@ -12,40 +12,27 @@ app.use(bodyParser.urlencoded({
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", function(req, res) {
+app.use(function(req, res, next) {
     Subreadit.find({}, function(err, subreadits) {
         if (err) {
             // TODO: Add error handling
         } else {
-            res.render("index", {
-                subreadits: subreadits
-            });
+            res.locals.subreadits = subreadits;
+            next();
         }
     });
+});
+
+app.get("/", function(req, res) {
+    res.render("index");
 });
 
 app.get("/r", function(req, res) {
-    Subreadit.find({}, function(err, subreadits) {
-        if (err) {
-            // TODO: Add error handling
-        } else {
-            res.render("subreadits", {
-                subreadits: subreadits
-            });
-        }
-    });
+    res.render("subreadits");
 });
 
 app.get("/r/new", function(req, res) {
-    Subreadit.find({}, function(err, subreadits) {
-        if (err) {
-            // TODO: Add error handling
-        } else {
-            res.render("new", {
-                subreadits: subreadits
-            });
-        }
-    });
+    res.render("new");
 });
 
 app.get("/r/:name", function(req, res) {
@@ -86,6 +73,7 @@ app.post("/r", function(req, res) {
 app.get("*", function(req, res) {
     res.render("404");
 });
+
 
 app.listen(3000, function() {
     console.log("Server is listening on port 3000");
