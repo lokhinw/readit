@@ -32,7 +32,7 @@ app.get("/r", function(req, res) {
 });
 
 app.get("/r/new", function(req, res) {
-    res.render("new");
+    res.render("newsub");
 });
 
 app.get("/r/:name", function(req, res) {
@@ -41,6 +41,21 @@ app.get("/r/:name", function(req, res) {
     }, function(err, subreadit) {
         if (subreadit) {
             res.render("subreadit", {
+                subreadit: subreadit
+            });
+        } else {
+            res.redirect("back");
+            // TODO: Add error handling
+        }
+    });
+});
+
+app.get("/r/:name/new", function(req, res) {
+    Subreadit.findOne({
+        "name": req.params.name
+    }, function(err, subreadit) {
+        if (subreadit) {
+            res.render("newpost", {
                 subreadit: subreadit
             });
         } else {
