@@ -5,10 +5,10 @@
         <div style="width: 30%;margin: 25px auto;">
             <form action="/r/<%= subreadit.name %>/new" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="title" placeholder="title">
+                    <input class="form-control" type="text" name="post[title]" placeholder="title">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="body" placeholder="body">
+                    <input class="form-control" type="text" name="post[body]" placeholder="body">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary btn-lg btn-block">Submit</button>

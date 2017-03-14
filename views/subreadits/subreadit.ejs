@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-9">
             <div class="well">
-            <% posts.forEach(function(post) { %>
+            <% subreadit.posts.forEach(function(post) { %>
               <a href="/r/<%= subreadit.name%>/<%= post._id %>"><%= post.title %></a>
             <% }) %>
             </div>

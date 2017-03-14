@@ -31,16 +31,23 @@ router.get("/new", function(req, res) {
 });
 
 router.post("/new", function(req, res) {
-    Post.create({
-        title: req.body.title,
-        body: req.body.body
-    }, function(err, post) {
-        if (err) {
-
-        } else {
-
-        }
-    });
+  Subreadit.findOne({
+      "name": req.params.name
+  }, function(err, subreadit){
+      if (err) {
+          console.log(err);
+      } else {
+          Post.create(req.body.post, function(err, post){
+              if (err) {
+                  console.log(err);
+              } else {
+                  post.save();
+                  subreadit.posts.push(post);
+                  subreadit.save();
+              }
+          });
+      }
+  });
 });
 
 router.get("/:id", function(req, res) {
@@ -48,7 +55,7 @@ router.get("/:id", function(req, res) {
         if (err) {
             res.render("404");
         } else {
-            res.render("post", {
+            res.render("posts/post", {
                 post: post
             });
         }

@@ -25,22 +25,13 @@ router.get("/new", function(req, res) {
 router.get("/:name", function(req, res) {
     Subreadit.findOne({
         "name": req.params.name
-    }, function(err, subreadit) {
-        if (subreadit) {
-            Post.find({}, function(err, posts) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.render("subreadit", {
-                        subreadit: subreadit,
-                        posts: posts
-                    });
-                }
-            });
-
+    }).populate("posts").exec(function(err, subreadit) {
+        if (err) {
+            console.log(err);
         } else {
-            res.redirect("back");
-            // TODO: Add error handling
+            res.render("subreadits/subreadit", {
+                subreadit: subreadit
+            });
         }
     });
 });
