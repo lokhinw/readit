@@ -71,7 +71,8 @@ app.post("/r", function(req, res) {
     }, function(err, subreadit) {
         if (subreadit && subreadit.length === 0) {
             Subreadit.create({
-                name: req.body.name
+                name: req.body.name,
+                description: req.body.description
             }, function(err, subreadit) {
                 if (err) {
                     // TODO: Add error handling for creating subreadit
