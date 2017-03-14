@@ -2,6 +2,7 @@ var express = require("express"),
     app = express(),
     mongoose = require("mongoose"),
     Subreadit = require("./models/subreadit"),
+    Post = require("./models/post"),
     bodyParser = require("body-parser");
 
 mongoose.connect("mongodb://localhost/readit");
@@ -40,9 +41,17 @@ app.get("/r/:name", function(req, res) {
         "name": req.params.name
     }, function(err, subreadit) {
         if (subreadit) {
-            res.render("subreadit", {
-                subreadit: subreadit
+            Post.find({}, function(err, posts) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("subreadit", {
+                        subreadit: subreadit,
+                        posts: posts
+                    });
+                }
             });
+
         } else {
             res.redirect("back");
             // TODO: Add error handling
@@ -61,6 +70,29 @@ app.get("/r/:name/new", function(req, res) {
         } else {
             res.redirect("back");
             // TODO: Add error handling
+        }
+    });
+});
+app.get("/r/:name/:id", function(req, res) {
+    Post.findById(req.params.id, function(err, post) {
+        if (err) {
+            res.render("404");
+        } else {
+            res.render("post", {
+                post: post
+            });
+        }
+    });
+});
+app.post("/r/:name/new", function(req, res) {
+    Post.create({
+        title: req.body.title,
+        body: req.body.body
+    }, function(err, post) {
+        if (err) {
+
+        } else {
+
         }
     });
 });
