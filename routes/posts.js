@@ -31,32 +31,41 @@ router.get("/new", function(req, res) {
 });
 
 router.post("/new", function(req, res) {
-  Subreadit.findOne({
-      "name": req.params.name
-  }, function(err, subreadit){
-      if (err) {
-          console.log(err);
-      } else {
-          Post.create(req.body.post, function(err, post){
-              if (err) {
-                  console.log(err);
-              } else {
-                  post.save();
-                  subreadit.posts.push(post);
-                  subreadit.save();
-              }
-          });
-      }
-  });
+    Subreadit.findOne({
+        "name": req.params.name
+    }, function(err, subreadit) {
+        if (err) {
+            console.log(err);
+        } else {
+            Post.create(req.body.post, function(err, post) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    post.save();
+                    subreadit.posts.push(post);
+                    subreadit.save();
+                }
+            });
+        }
+    });
 });
 
 router.get("/:id", function(req, res) {
-    Post.findById(req.params.id, function(err, post) {
+    Subreadit.findOne({
+        "name": req.params.name
+    }, function(err, subreadit) {
         if (err) {
-            res.render("404");
+            console.log(err);
         } else {
-            res.render("posts/post", {
-                post: post
+            Post.findById(req.params.id, function(err, post) {
+                if (err) {
+                    res.render("404");
+                } else {
+                    res.render("posts/post", {
+                        subreadit: subreadit,
+                        post: post
+                    });
+                }
             });
         }
     });

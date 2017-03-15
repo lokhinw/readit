@@ -1,4 +1,41 @@
 <% include ../partials/header %>
-<h1><%= post.title %></h1>
-<h4><%= post.body %></h4>
+
+<div class="container">
+    <h1 class="text-center">/r/<%= subreadit.name %></h1>
+    <div class="row">
+        <div class="col-xs-9">
+            <div class="well well-sm">
+                <h3 style="margin: 0;"><%= post.title %></h3>
+            </div>
+            <div class="well">
+                <p><%= post.body %></p>
+                <p>submitted by
+                    <a class="post-links" href="#">user</a>
+                </p>
+                <a class="post-links" href="#">comment</a>
+                <a class="post-links" href="#">save</a>
+                <a class="post-links" href="#">edit</a>
+                <a class="post-links" href="#">delete</a>
+            </div>
+            <div class="well">
+
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="well">
+                <h4 class="text-center">/r/<%= subreadit.name %></h4>
+                <p class="text-center"><%= subreadit.description %></p>
+            </div>
+            <div class="well">
+                <input type="text" class="form-control text-center" placeholder="search">
+            </div>
+            <div class="well">
+                <a class="btn btn-large btn-primary btn-block" href="/r/<%= subreadit.name %>/new">Submit a new text post</a>
+                <a class="btn btn-large btn-primary btn-block" href="/r/new">Create your own subreadit</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <% include ../partials/footer %>
