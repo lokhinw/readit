@@ -39,40 +39,17 @@ router.get("/new", function(req, res) {
 });
 
 router.post("/new", function(req, res) {
-    Subreadit.findOne({
-        "name": req.params.name
-    }, function(err, subreadit) {
+    Post.findById(req.params.id, function(err, post) {
         if (err) {
             console.log(err);
         } else {
-            Post.create(req.body.post, function(err, post) {
+            Comment.create(req.body.comment, function(err, comment) {
                 if (err) {
                     console.log(err);
                 } else {
+                    comment.save();
+                    post.comments.push(comment);
                     post.save();
-                    subreadit.posts.push(post);
-                    subreadit.save();
-                }
-            });
-        }
-    });
-});
-
-router.get("/:id", function(req, res) {
-    Subreadit.findOne({
-        "name": req.params.name
-    }, function(err, subreadit) {
-        if (err) {
-            console.log(err);
-        } else {
-            Post.findById(req.params.id, function(err, post) {
-                if (err) {
-                    res.render("404");
-                } else {
-                    res.render("posts/post", {
-                        subreadit: subreadit,
-                        post: post
-                    });
                 }
             });
         }

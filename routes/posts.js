@@ -57,7 +57,7 @@ router.get("/:id", function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            Post.findById(req.params.id, function(err, post) {
+            Post.findById(req.params.id).populate("comments").exec(function(err, post) {
                 if (err) {
                     res.render("404");
                 } else {

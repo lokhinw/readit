@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-xs-9">
             <div class="well well-sm">
-                <h3 style="margin: 0;"><%= post.title %></h3>
+                <h3 style="margin: 0; word-wrap: break-word;"><%= post.title %></h3>
             </div>
             <div class="well">
-                <p><%= post.body %></p>
+                <p style="word-wrap: break-word;"><%= post.body %></p>
                 <p>submitted by
                     <a class="post-links" href="#">user</a>
                 </p>
@@ -17,8 +17,10 @@
                 <a class="post-links" href="#">edit</a>
                 <a class="post-links" href="#">delete</a>
             </div>
-            <div class="well">
-
+            <div class="well" style="word-wrap: break-word;">
+              <% post.comments.reverse().forEach(function(comment){ %>
+                  <p><%= comment.text %></p>
+              <% }); %>
             </div>
         </div>
         <div class="col-xs-3">

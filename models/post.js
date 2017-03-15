@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var postSchema = new mongoose.Schema({
     title: String,
     body: String,
+    commentCount: Number,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
