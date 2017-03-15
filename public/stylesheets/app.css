@@ -8,3 +8,25 @@
     bottom: 10px;
     width: auto;
 }
+
+.post-links {
+    color: #333;
+    margin-right: 30px;
+    font-weight: bold;
+}
+
+.post-links:link {
+    color: #333;
+}
+
+.post-links:hover {
+    color: #333;
+}
+
+.post-links:active {
+    color: #333;
+}
+
+.post-links:visited {
+    color: #333;
+}

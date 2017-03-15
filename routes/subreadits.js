@@ -26,8 +26,9 @@ router.get("/:name", function(req, res) {
     Subreadit.findOne({
         "name": req.params.name
     }).populate("posts").exec(function(err, subreadit) {
-        if (err) {
+        if (err || subreadit === null) {
             console.log(err);
+            res.render("404");
         } else {
             res.render("subreadits/subreadit", {
                 subreadit: subreadit
