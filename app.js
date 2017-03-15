@@ -7,7 +7,8 @@ var express = require("express"),
 
 var subreaditRoutes = require("./routes/subreadits"),
     postRoutes = require("./routes/posts"),
-    indexRoutes = require("./routes/index");
+    indexRoutes = require("./routes/index"),
+    commentRoutes = require("./routes/comments");
 
 mongoose.connect("mongodb://localhost/readit");
 
@@ -21,6 +22,7 @@ app.use(express.static(__dirname + "/public"));
 app.use("/", indexRoutes);
 app.use("/r", subreaditRoutes);
 app.use("/r/:name", postRoutes);
+app.use("/r/:name/:id/comments", commentRoutes);
 
 app.get("*", function(req, res) {
     res.render("404");
