@@ -71,4 +71,14 @@ router.get("/:id", function(req, res) {
     });
 });
 
+router.delete("/:id", function(req, res){
+    Post.findByIdAndRemove(req.params.id, function(err){
+        if (err) {
+
+        } else {
+          res.redirect("/");
+        }
+    });
+});
+
 module.exports = router;

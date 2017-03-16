@@ -3,6 +3,7 @@ var express = require("express"),
     mongoose = require("mongoose"),
     Subreadit = require("./models/subreadit"),
     Post = require("./models/post"),
+    methodOverride = require("method-override"),
     bodyParser = require("body-parser");
 
 var subreaditRoutes = require("./routes/subreadits"),
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 
 app.use("/", indexRoutes);
 app.use("/r", subreaditRoutes);

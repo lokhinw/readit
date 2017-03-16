@@ -10,10 +10,12 @@
                     <p>submitted by
                         <a class="post-links" href="#">user</a>
                     </p>
-                    <a class="post-links" href="#">comment</a>
+                    <a class="post-links" href="/r/<%= subreadit.name%>/<%= post._id %>/comments/new">comment</a>
                     <a class="post-links" href="#">save</a>
-                    <a class="post-links" href="#">edit</a>
-                    <a class="post-links" href="#">delete</a>
+                    <a class="post-links" href="/r/<%= subreadit.name%>/<%= post._id %>/edit">edit</a>
+                    <form style="display: inline;" id="delete-form" action="/r/<%= subreadit.name %>/<%= post._id %>?_method=DELETE" method="POST">
+                          <a class="post-links" href="javascript:{}" onclick="document.getElementById('delete-form').submit();">delete</a>
+                    </form>
                 </div>
             <% }); %>
 
@@ -24,7 +26,9 @@
                 <p class="text-center"><%= subreadit.description %></p>
             </div>
             <div class="well">
-                <input type="text" class="form-control text-center" placeholder="search">
+                <form action="/r/<%= subreadit.name %>/search" method="POST">
+                    <input type="text" class="form-control text-center" placeholder="search">
+                </form>
             </div>
             <div class="well">
                 <a class="btn btn-large btn-primary btn-block" href="/r/<%= subreadit.name %>/new">Submit a new text post</a>

@@ -4,23 +4,30 @@
     <h1 class="text-center">/r/<%= subreadit.name %></h1>
     <div class="row">
         <div class="col-xs-9">
-            <div class="well well-sm">
-                <h3 style="margin: 0; word-wrap: break-word;"><%= post.title %></h3>
-            </div>
             <div class="well">
-                <p style="word-wrap: break-word;"><%= post.body %></p>
+                <h3 style="margin: 0; word-wrap: break-word;">
+                    <a><%= post.title %></a>
+                </h3>
                 <p>submitted by
                     <a class="post-links" href="#">user</a>
                 </p>
+                <p style="word-wrap: break-word; padding-left: 15px;"><%= post.body %></p>
                 <a class="post-links" href="#">comment</a>
                 <a class="post-links" href="#">save</a>
                 <a class="post-links" href="#">edit</a>
-                <a class="post-links" href="#">delete</a>
+                <form style="display: inline;" id="delete-form" action="/r/<%= subreadit.name %>/<%= post._id %>?_method=DELETE" method="POST">
+                      <a class="post-links" href="javascript:{}" onclick="document.getElementById('delete-form').submit();">delete</a>
+                </form>
             </div>
             <div class="well" style="word-wrap: break-word;">
-              <% post.comments.reverse().forEach(function(comment){ %>
-                  <p><%= comment.text %></p>
-              <% }); %>
+                <% post.comments.reverse().forEach(function(comment){ %>
+                    <p style="margin: 0;"><a class="post-links" href="#">user</a></p>
+                    <p style="margin: 0;"><%= comment.text %></p>
+                    <div style="margin-bottom: 15px; font-size: 12px;">
+                    <a class="post-links" href="#">edit</a>
+                    <a class="post-links" href="#">delete</a>
+                    </div>
+                <% }); %>
             </div>
         </div>
         <div class="col-xs-3">
