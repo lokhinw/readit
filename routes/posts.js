@@ -71,12 +71,43 @@ router.get("/:id", function(req, res) {
     });
 });
 
-router.delete("/:id", function(req, res){
-    Post.findByIdAndRemove(req.params.id, function(err){
+router.get("/:id/edit", function(req, res) {
+    Subreadit.findOne({
+        "name": req.params.name
+    }, function(err, subreadit) {
+        if (err) {
+            console.log(err);
+        } else {
+            Post.findById(req.params.id, function(err, post) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("posts/edit", {
+                        subreadit: subreadit,
+                        post: post
+                    });
+                }
+            });
+        }
+    });
+});
+
+router.put("/:id", function(req, res){
+    Post.findByIdAndUpdate(req.params.id, req.body.post, function(err, post){
+        if (err) {
+            res.redirect("back");
+        } else {
+            res.redirect("/r/" + req.params.name + "/" + req.params.id);
+        }
+    });
+});
+
+router.delete("/:id", function(req, res) {
+    Post.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
 
         } else {
-          res.redirect("/");
+            res.redirect("back");
         }
     });
 });

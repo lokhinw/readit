@@ -14,7 +14,7 @@
                 <p style="word-wrap: break-word; padding-left: 15px;"><%= post.body %></p>
                 <a class="post-links" href="#">comment</a>
                 <a class="post-links" href="#">save</a>
-                <a class="post-links" href="#">edit</a>
+                <a class="post-links" href="/r/<%= subreadit.name%>/<%= post._id %>/edit">edit</a>
                 <form style="display: inline;" id="delete-form" action="/r/<%= subreadit.name %>/<%= post._id %>?_method=DELETE" method="POST">
                       <a class="post-links" href="javascript:{}" onclick="document.getElementById('delete-form').submit();">delete</a>
                 </form>
